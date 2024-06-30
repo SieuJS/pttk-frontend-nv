@@ -49,7 +49,6 @@ const LoginForm = () => {
                 type : data.account.loainv,
                 expiredDateToken : null
             }
-            console.log('going auth', userData)
             await auth.login(userData);
 
             router.push('/')

@@ -5,6 +5,7 @@ import {
   UseFormRegisterReturn,
 } from "react-hook-form";
 import { ChangeEvent } from "react";
+import { AlignLeft } from "lucide-react";
 
 interface InputProps {
   label?: string;
@@ -19,6 +20,7 @@ interface InputProps {
   noBorder?: boolean;
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
   value?: string;
+  alignRight? : boolean;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -29,6 +31,7 @@ const Input: React.FC<InputProps> = ({
   errors,
   disabled,
   isTextArea,
+  alignRight,
   noLabel,
   placeHolder,
   value,
@@ -38,6 +41,7 @@ const Input: React.FC<InputProps> = ({
   const inputElement = isTextArea ? (
     <textarea
       id={id}
+      value = {value}
       autoComplete={id}
       rows={6}
       disabled={disabled}
@@ -60,7 +64,8 @@ const Input: React.FC<InputProps> = ({
       focus:outline-purple-600
       sm:text-sm
       sm:leading-6
-     
+      truncate ...
+      text-${!alignRight?  "left" : "right"}
       `,
         errors && errors[id] && "ring-rose-700",
         disabled && "opacity-50 cursor-default"
@@ -94,7 +99,8 @@ const Input: React.FC<InputProps> = ({
       focus:outline-purple-600
       sm:text-sm
       sm:leading-6
-     
+      text-${!alignRight?  "left" : "right"}
+
       `,
 
         // DELETED MB-5
@@ -110,7 +116,7 @@ const Input: React.FC<InputProps> = ({
       {!noLabel && (
         <label
           htmlFor={id}
-          className="block text-sm font-medium leading-6 text-gray-900 mb-2"
+          className="block text-sm font-medium leading-6 text-gray-900 mb-2 truncate"
         >
           {label}:
         </label>

@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import type { NextRequest } from 'next/server'
+import { NextRequest } from 'next/server'
 
 const privatePaths = ['/dashboard']
 const authPaths = ['/signin']
@@ -11,15 +11,15 @@ export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
   const sessionToken = request.cookies.get('sessionToken')?.value
   // Chưa đăng nhập thì không cho vào private paths
+  if (pathname === '/') {
+    return NextResponse.redirect(new URL('/dashboard', request.url));
+  }
   if (privatePaths.some((path) => pathname.startsWith(path)) && !sessionToken) {
     return NextResponse.redirect(new URL('/signin', request.url))
   }
   // Đăng nhập rồi thì không cho vào login/register nữa
   else if (authPaths.some((path) => pathname.startsWith(path)) && sessionToken) {
-    return NextResponse.redirect(new URL('/dashboard', request.url))
-  }
-  else if (pathname === '/') {
-    return NextResponse.redirect(new URL('/dashboard', request.url))
+    return NextResponse.redirect(new URL('/dashboard', request.url));
   }
 
   return NextResponse.next()

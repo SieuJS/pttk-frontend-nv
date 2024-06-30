@@ -13,6 +13,7 @@ export const AuthContext = createContext (
     logout : () => {},
     userId : '',
     type : '',
+    token : ''
   }
 );
 

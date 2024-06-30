@@ -22,7 +22,8 @@ const AuthProvider = ({
                 login , 
                 logout, 
                 userId : userId || '',
-                type : type || ''
+                type : type || '',
+                token : token || '',
             }}
         >
             {children}

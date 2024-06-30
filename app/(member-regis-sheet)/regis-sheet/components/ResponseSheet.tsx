@@ -9,7 +9,7 @@ import { SheetItemProps } from './SheetItem'
 import { Box, Button, CircularProgress, Modal } from '@mui/material'
 import { Card, CardFooter, CardHeader, CardContent } from '@/components/ui/card'
 import SheetDetail from './SheetDetail'
-import { MegaphoneIcon } from 'lucide-react'
+import { useAuthContext } from '@/components/shared/AppProvider'
 
 import LoadingModal from '@/components/modal/LoadingModal'
 const style = {
@@ -37,14 +37,15 @@ function ResponseSheet({ token, filter }: ResponseSheetProps) {
     const [openLoading, setOpenLoading] = useState(false);
     const [openTrans, setOpenTrans] = useState(false)
     const [messmage, setMessage] = useState<string|null>('');
-
+    const auth = useAuthContext() ;
     useEffect(() => {
+        if (!auth.isLoggedIn) return ; 
         const fetchSheet = async () => {
 
             let res = await sendRequest(
                 `${envConfig.BACKEND_API}/regis-sheet/get-${filter}?page=1&limit=10`,
                 'GET', {
-                'Authorization': `Bearer ${token}`
+                'Authorization': `Bearer ${auth.token}`
             }
             )
 
@@ -54,7 +55,7 @@ function ResponseSheet({ token, filter }: ResponseSheetProps) {
             }
         }
         fetchSheet();
-    }, [])
+    }, [auth.isLoggedIn])
     const onDetailHandler = (index: any) => {
         setOpenDetail(true)
         setDetail(data[index]);
