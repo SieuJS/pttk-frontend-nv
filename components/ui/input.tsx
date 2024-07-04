@@ -21,6 +21,8 @@ interface InputProps {
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
   value?: string;
   alignRight? : boolean;
+  onBlur? : (event: any) => void;
+  className? : string;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -37,6 +39,8 @@ const Input: React.FC<InputProps> = ({
   value,
   onChange,
   noBorder,
+  onBlur,
+  className
 }) => {
   const inputElement = isTextArea ? (
     <textarea
@@ -46,7 +50,9 @@ const Input: React.FC<InputProps> = ({
       rows={6}
       disabled={disabled}
       placeholder={placeHolder}
+      onBlur={onBlur}
       {...register}
+      
       className={clsx(
         `block
       w-full
@@ -66,8 +72,9 @@ const Input: React.FC<InputProps> = ({
       sm:leading-6
       truncate ...
       text-${!alignRight?  "left" : "right"}
+       ${className}
       `,
-        errors && errors[id] && "ring-rose-700",
+        errors && id && errors[id] && "ring-rose-700",
         disabled && "opacity-50 cursor-default"
       )}
     />
@@ -80,8 +87,10 @@ const Input: React.FC<InputProps> = ({
       value={value}
       disabled={disabled}
       placeholder={placeHolder}
-      {...register}
       onChange={onChange}
+      onBlur={onBlur}
+      {...register}
+
       className={clsx(
         `block
       w-full
@@ -100,11 +109,11 @@ const Input: React.FC<InputProps> = ({
       sm:text-sm
       sm:leading-6
       text-${!alignRight?  "left" : "right"}
-
+      ${className}
       `,
 
         // DELETED MB-5
-        errors && errors[id] && "ring-rose-700",
+        errors && id && errors[id] && "ring-rose-700",
         disabled && "opacity-50 cursor-default",
         noBorder && "ring-0 shadow-none mb-5"
       )}
@@ -123,12 +132,12 @@ const Input: React.FC<InputProps> = ({
       )}
       <div>
         {inputElement}
-        {errors && errors[id] && (
+        {errors && id && errors[id] && (
           <span className="text-red-600 text-sm">
-            {errors[id]?.message && (
-              <>{errors[id]?.message}</>
+            {id && errors[id]?.message && (
+              <>{id && errors[id]?.message}</>
             )}
-            {!errors[id]?.message && `${label} is required`}
+            {id && !errors[id]?.message && `${label} is required`}
           </span>
         )}
       </div>

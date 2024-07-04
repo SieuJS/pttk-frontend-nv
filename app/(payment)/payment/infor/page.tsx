@@ -1,9 +1,9 @@
 import React from 'react'
-import InforSearch from '../../components/InforSearch'
+import HiringSearch from '../../components/HiringSearch'
 function page() {
   return (
     <>
-      <InforSearch></InforSearch>
+      <HiringSearch/>
     </>
   )
 }

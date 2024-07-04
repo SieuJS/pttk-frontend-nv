@@ -1,14 +1,14 @@
-import { Tabs} from "@/components/ui/tabs"
-import Link from 'next/link'
-import { usePathname } from "next/navigation"
 
-function layout() {
+import HiringNavigation from '../components/HiringNavigation';
+export default function HiringSheetLayout({
+  children , 
+} : Readonly<{children : React.ReactNode;}>){
   return (
-    <Tabs defaultValue="account" className="w-[400px]">
-      <Link href = '/hiring-sheet/create' >Tạo phiếu</Link>
-  </Tabs>
+    <>
+    <HiringNavigation/>
+    {children}
+    </>
 
   )
 }
 
-export default layout
