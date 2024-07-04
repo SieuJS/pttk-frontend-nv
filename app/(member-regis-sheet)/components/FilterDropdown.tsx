@@ -31,7 +31,6 @@ const filters : filterValue[]  = [
   }
 ]
 
-
 function FilterDropdown() {
   const [pathname, setPathname] = useState<string | undefined>('');
   const [filter, setFilter] = useState<string | undefined>('');
