@@ -1,5 +1,4 @@
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { Table, TableBody, TableHeader, TableRow, TableCell, TableHead } from "@/components/ui/table";
+
 import CreatePayment from "@/app/(payment)/components/CreatePayment";
 interface DynamicProps {
     params : {

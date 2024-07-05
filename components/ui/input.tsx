@@ -18,10 +18,9 @@ interface InputProps {
   isTextArea?: boolean;
   placeHolder?: string;
   noBorder?: boolean;
-  onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
   value?: string;
+  onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
   alignRight? : boolean;
-  onBlur? : (event: any) => void;
   className? : string;
 }
 
@@ -39,7 +38,6 @@ const Input: React.FC<InputProps> = ({
   value,
   onChange,
   noBorder,
-  onBlur,
   className
 }) => {
   const inputElement = isTextArea ? (
@@ -50,7 +48,6 @@ const Input: React.FC<InputProps> = ({
       rows={6}
       disabled={disabled}
       placeholder={placeHolder}
-      onBlur={onBlur}
       {...register}
       
       className={clsx(
@@ -87,10 +84,8 @@ const Input: React.FC<InputProps> = ({
       value={value}
       disabled={disabled}
       placeholder={placeHolder}
-      onChange={onChange}
-      onBlur={onBlur}
       {...register}
-
+      onChange={onChange}
       className={clsx(
         `block
       w-full

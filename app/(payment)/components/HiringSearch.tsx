@@ -1,6 +1,6 @@
 'use client'
 import { useForm } from 'react-hook-form';
-import { Card, CardHeader, CardContent, CardFooter, CardTitle } from "@/components/ui/card";
+
 import Input from "@/components/ui/input";
 import { useState, useEffect, ChangeEvent } from 'react';
 import { BackEndURL } from '@/components/env/config';
@@ -17,6 +17,7 @@ export default function HiringSearch() {
     setValue,
     formState: { errors },
     getValues,
+    handleSubmit
   } = useForm<HiringSheet>({
     mode: 'all',
     defaultValues: {
@@ -26,17 +27,17 @@ export default function HiringSearch() {
     },
   });
 
-  const fetchData = async () => {
+  const fetchData = async (page?:number) => {
     const searchData = getValues();
     try {
-      const response = await fetch(BackEndURL+`/hiring-sheet/search?limit=${limit}&page=${currentPage}`, {
+      const response = await fetch(BackEndURL+`/hiring-sheet/search?limit=${limit}&page=${page || currentPage}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ 
           ...searchData, 
-          page: currentPage, // Pass current page to API
+          page: page || currentPage, // Pass current page to API
         }),
       });
 
@@ -57,7 +58,9 @@ export default function HiringSearch() {
     fetchData();
   }, [currentPage]);
 
-  async function onSearch (event : ChangeEvent<HTMLInputElement>){
+  async function onSearch (event? : any){
+    console.log('on search');
+
     setCurrentPage(1);
     let fieldName = event.target.id;
     if (fieldName === 'doanhnghiep') {
@@ -72,22 +75,19 @@ export default function HiringSearch() {
     await fetchData();
   }
 
-
-
   // Handle page change (from pagination buttons)
-  const handlePageChange = (newPage: number) => {
+  const handlePageChange = async (newPage: number) => {
     setCurrentPage(newPage);
+    await fetchData();
   };
-
 
   return (
     <>
-      {/* ... Input fields (with onBlur={onSearch}) */}
-      <div className="grid grid-cols-3 gap-4">
+      <form className="grid grid-cols-3 gap-4" onSubmit={handleSubmit(onSearch)}>        
       <Input
           label='Mã phiếu đăng tuyển'
           id='maphieudangtuyen'
-          {...register('maphieudangtuyen', {onChange:onSearch})}
+          {...register('maphieudangtuyen', {onChange: onSearch})}
         />
         <Input
           label='Mã số thuế'
@@ -100,7 +100,7 @@ export default function HiringSearch() {
           id='vitridangtuyen'
           {...register('vitridangtuyen', {onChange : onSearch})}
         />
-        </div>
+        </form>
       {/* Display Search Results */}
     <DataTable columns={detailColumns} data={searchResults} />
     <Pagination

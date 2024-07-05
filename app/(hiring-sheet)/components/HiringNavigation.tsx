@@ -32,7 +32,7 @@ const HiringNavigation = () => {
                         let link;
                         let trueLink = path.includes(p.href);
                         return (
-                            <li className="-mb-px mr-1">
+                            <li className="-mb-px mr-1 text-muted-foreground">
                                 <Link href={base + p.href} className={trueLink ? styleActive : styleBase}>
                                     {p.label}
                                 </Link>

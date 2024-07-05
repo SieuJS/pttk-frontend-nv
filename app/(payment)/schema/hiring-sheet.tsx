@@ -2,6 +2,7 @@
 
 import { ColumnDef } from "@tanstack/react-table"
 import { ArrowUpDown, MoreHorizontal } from "lucide-react"
+import CircularProgress from "@mui/joy/CircularProgress"
 import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
@@ -19,6 +20,7 @@ export type HiringSheet = {
   doanhnghiep: string;
   maphieudangtuyen : string ;
   vitridangtuyen : string ;
+  thoigiantao : Date ;
 }
 
 
@@ -35,6 +37,24 @@ export const columns: ColumnDef<HiringSheet>[] = [
     accessorKey: "vitridangtuyen",
     header: "Vị trí tuyển dụng",
   },
+  {
+    accessorKey : 'thoigiantao',
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Thời điểm tạo
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      )
+    },
+    cell : ({row}) => {
+      const sheet = row.original
+      return (<div className="text-400">{new Date(sheet.thoigiantao).toDateString()}</div>)
+    }
+  }
 ]
 
 export const detailColumns : ColumnDef<HiringSheet>[] = [

@@ -76,13 +76,11 @@ function CreateSheet() {
 
 
     const onSubmit = handleSubmit(async (formData: FormData) => {
-        console.log('submit call', formData)
         try {
             let response = await sendRequest(
                 BackEndURL + '/company/validate/' + formData.doanhnghiep
             )
             setTencongty(response.data.tencongty);
-            console.log(response)
             setConfirmModal(true)
         }catch (err) {
             console.log(err) ;
@@ -278,7 +276,6 @@ function CreateSheet() {
                                         id="yeucau.gioitinh"
                                         {...register('yeucau.gioitinh', {
                                             onChange : (e)=>{
-                                                console.log(e.target.value)
                                                 setValue('yeucau.gioitinh', e.target.value)
                                             }
                                         })}
@@ -291,12 +288,12 @@ function CreateSheet() {
                                 </FormControl>
 
                                 <FormControl fullWidth>
-                                    <InputLabel>Bằng cấp</InputLabel>
+                                    <InputLabel id="bangcap-label">Bằng cấp</InputLabel>
                                     <Select
+                                    labelId="bangcap-label"
                                         id="yeucau.bangcap"
                                         {...register('yeucau.bangcap', {
                                             onChange : (e)=>{
-                                                console.log(e.target.value)
                                                 setValue('yeucau.bangcap', e.target.value)
                                             }
                                         })}
@@ -341,7 +338,7 @@ function CreateSheet() {
                                 }}
                             />
                         </div>
-
+                                
                         <div className="border mt-2 mb-2"></div>
                         <div className='mt-4'>
                             <Button disabled = {!isValid}>{isLoading ? <CircularProgress/> : "Đăng ký"}</Button>

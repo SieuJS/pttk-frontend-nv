@@ -36,12 +36,12 @@ const TabLinks = React.forwardRef<HTMLDivElement, TabLinkProps> (({links, baseUR
         <>
             <ul className="flex border-b">
                 {
-                    links.map((p) => {
+                    links.map((p,i) => {
                         let link;
                         let trueLink = path.includes(p.href);
                         return (
-                            <li className="-mb-px mr-1">
-                                <Link href={base + p.href} className={trueLink ? styleActive : styleBase}>
+                            <li className="-mb-px mr-1" key={i}>
+                                <Link  href={base + p.href} className={trueLink ? styleActive : styleBase}>
                                     {p.label}
                                 </Link>
                             </li>
