@@ -5,9 +5,14 @@ import Input from "@/components/ui/input";
 import { useState, useEffect, ChangeEvent } from 'react';
 import { BackEndURL } from '@/components/env/config';
 import { Pagination } from '@mui/material';
-import { HiringSheet, columns, detailColumns } from '../schema/hiring-sheet';
+import { HiringSheet, columns, detailColumns, paymentColumns } from '../schema/hiring-sheet';
 import { DataTable } from '@/components/shared/DataTable';
-export default function HiringSearch() {
+
+interface SearchHiringProps {
+  context? : string ;
+}
+
+export default function HiringSearch({context} : SearchHiringProps) {
   const [searchResults, setSearchResults] = useState([]);
   const [totalCount, setTotalCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
@@ -102,7 +107,7 @@ export default function HiringSearch() {
         />
         </form>
       {/* Display Search Results */}
-    <DataTable columns={detailColumns} data={searchResults} />
+    <DataTable columns={context === 'hiring' ? detailColumns : paymentColumns} data={searchResults} />
     <Pagination
         count={Math.ceil(totalCount / limit)} // Assuming 10 items per page
         page={currentPage} 

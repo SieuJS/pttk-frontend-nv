@@ -71,6 +71,20 @@ export const detailColumns : ColumnDef<HiringSheet>[] = [
   }
 ]
 
+export const paymentColumns : ColumnDef<HiringSheet>[] = [
+  ...columns, 
+  {
+    id : 'detail',
+    cell : ({row}) => {
+      const sheet = row.original
+ 
+      return (
+       <Link href={"/payment/create/" +sheet.maphieudangtuyen}><Button variant={"outline"}>Thanh toán</Button></Link>
+      )
+    }
+  }
+]
+
 
 
 
