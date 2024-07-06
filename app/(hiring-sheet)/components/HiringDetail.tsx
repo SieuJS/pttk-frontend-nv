@@ -18,7 +18,6 @@ function HiringDetail({ maphieudangtuyen }: DetailProps) {
     
     const [data, setData] = useState<FormData>() ;
     const {sendRequest, isLoading, error, clearError} = useHttpClient() ;
-    console.log(maphieudangtuyen)
     useEffect(() => {
         const fetchData = async() => {
             try {

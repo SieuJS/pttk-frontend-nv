@@ -65,7 +65,7 @@ export const detailColumns : ColumnDef<HiringSheet>[] = [
       const sheet = row.original
  
       return (
-       <Link href={"/payment/create/" +sheet.maphieudangtuyen}><Button variant={"outline"}>Chi tiết</Button></Link>
+       <Link href={"/hiring-sheet/infor/" +sheet.maphieudangtuyen}><Button variant={"outline"}>Chi tiết</Button></Link>
       )
     }
   }
