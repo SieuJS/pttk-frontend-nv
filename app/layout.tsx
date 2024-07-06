@@ -10,7 +10,7 @@ import Sidebar from "@/components/shared/sidebar";
 import Header from "@/components/shared/header";
 import React from "react";
 import AuthProvider from "@/components/shared/AppProvider";
-
+import { Toaster } from "@/components/ui/toaster";
 const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
@@ -49,6 +49,7 @@ export default function RootLayout({
             <Header/>
             <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
             {children}
+            <Toaster/>
             </main>
             </div>
           </div>
