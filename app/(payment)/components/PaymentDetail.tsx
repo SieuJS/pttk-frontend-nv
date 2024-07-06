@@ -5,7 +5,8 @@ import { useHttpClient } from "@/shared/hooks/http-hook";
 import React, { useEffect, useState } from 'react';
 import DoPayment from './DoPayment';
 import { HoaDon } from "./DoPayment";
-
+import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
 
 interface DetailProps {
   hoadon: HoaDon;
@@ -13,7 +14,7 @@ interface DetailProps {
 
 function PaymentDetail({ hoadon }: DetailProps) {
   const [showPaymentModal, setShowPaymentModal] = useState(false);
-  
+  const router = useRouter();
   return (
     <div>
       <Card className="w-full">
@@ -60,13 +61,14 @@ function PaymentDetail({ hoadon }: DetailProps) {
               {hoadon.dotdathanhtoan}
             </p>
           </div>
-          <div className="col-span-2 mt-4">
-            <button
+          <div className="col-span-2 mt-4 flex gap-4">
+            <Button variant={'destructive'} onClick={router.back}>Quay lai</Button>
+              {!hoadon.trangthaithanhtoan && <Button
               onClick={() => setShowPaymentModal(true)}
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
             >
               Thanh toán
-            </button>
+            </Button>}
           </div>
         </CardContent>
       </Card>

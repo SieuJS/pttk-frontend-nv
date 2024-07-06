@@ -22,6 +22,7 @@ export interface HoaDon {
   sodotthanhtoan: string;
   sotienconlai: string;
   dotdathanhtoan: string;
+  trangthaithanhtoan : boolean;
 }
 
 interface ThanhToan { 
