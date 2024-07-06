@@ -23,7 +23,6 @@ const SolanValues = ['1' , '2', '3'] ;
 
 const CreatePayment = () => {
 
-
   const {
     register,
     setValue,
@@ -41,16 +40,15 @@ const CreatePayment = () => {
     }
   }
 )
-
   const onSubmit = handleSubmit (() => {
     console.log('on submit')
   })
-  
   
   return <>
       <div>
       <form onSubmit={onSubmit}>
       <FormControl sx={{ m: 1, minWidth: 120 }}>
+        
         <InputLabel id="solan-label">Số lần thanh toán</InputLabel>
         <Select
           labelId="solan-label"
@@ -71,6 +69,7 @@ const CreatePayment = () => {
         </Select>
         <FormHelperText>Số lần thanh toán được chia</FormHelperText>
       </FormControl>
+
       </form>
     </div>
   </>

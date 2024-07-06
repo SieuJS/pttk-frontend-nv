@@ -36,7 +36,6 @@ const ConfirmModal: React.FC<ConfirmProps> = ({
     tendoanhnghiep
 }) => {
     const { sendRequest, isLoading, error, clearError } = useHttpClient();
-    const [stateModal, setStateModal] = useState(false);
     const [response, setResponse] = useState<Response>();
     const [isSent,setIsSend] = useState(false);
     const onSend = async () => {
