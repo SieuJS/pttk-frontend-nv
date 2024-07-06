@@ -9,13 +9,13 @@ import { FormData } from './CreateSheet'
 import { BackEndURL } from '@/components/env/config'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
-
+import { useRouter } from 'next/navigation'
 interface DetailProps {
     maphieudangtuyen: string;
 }
 
 function HiringDetail({ maphieudangtuyen }: DetailProps) {
-    
+    const router = useRouter();
     const [data, setData] = useState<FormData>() ;
     const {sendRequest, isLoading, error, clearError} = useHttpClient() ;
     useEffect(() => {
@@ -151,8 +151,8 @@ function HiringDetail({ maphieudangtuyen }: DetailProps) {
                 <div className="border mt-2 mb-2"></div>
             </CardContent>
             <div className="mx-6 my-6 flex flex-row gap-6">
-                        <Button className='w-100 basis-1/2' variant={'destructive'} >
-                            <Link href={'/hiring-sheet/infor'}><div className="font-medium">Quay lại</div></Link>
+                        <Button className='w-100 basis-1/2' variant={'destructive'} onClick={()=>{router.back()}}>
+                            Quay lại
                         </Button>
                         <Button className='w-100 basis-1/2' >  Chỉnh sửa</Button>
             </div>               
