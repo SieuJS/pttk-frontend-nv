@@ -14,7 +14,7 @@ import { BackEndURL } from '@/components/env/config';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, Modal } from '@mui/material';
 import { useToast } from "@/components/ui/use-toast"
-
+import { useRouter } from 'next/navigation';
 
 export interface HoaDon {
   mahoadon: string;
@@ -43,7 +43,7 @@ const paymentTypes = [
 
 export default function DoPayment({ hoadon, onClose }: DoPaymentProps) {
     const lanthanhtoan :number = (parseInt(hoadon?.dotdathanhtoan || '0'))+ 1;
-
+    const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -61,7 +61,7 @@ export default function DoPayment({ hoadon, onClose }: DoPaymentProps) {
   });
   const {toast} = useToast()
 
-  const { sendRequest, isLoading } = useHttpClient();
+  const { sendRequest, isLoading , error, clearError} = useHttpClient();
   const [paymentType, setPaymentType] = useState('');
 
   const handleChange = (event: any) => {
@@ -71,35 +71,37 @@ export default function DoPayment({ hoadon, onClose }: DoPaymentProps) {
 
   const onSubmit = async (data: ThanhToan) => {
     // Implement your payment logic here
-    console.log(data)
-    // try {
-    //   const responseData = await sendRequest(
-    //     `${BackEndURL}/api/...`, // Replace with your API endpoint
-    //     'POST',
-    //     {
-    //       'Content-Type': 'application/json',
-    //     },
-    //     JSON.stringify(data)
-    //   );
+    clearError();
+    try {
+      const responseData = await sendRequest(
+        `${BackEndURL}/payment/pay`, // Replace with your API endpoint
+        'POST',
+        {
+          'Content-Type': 'application/json',
+        },
+        JSON.stringify(data)
+      );
 
-    //   // Handle success (e.g., show a success message, update UI)
-    //   console.log('Payment successful:', responseData);
-    //   toast({
-    //     variant:'default',
-    //     title: "Hoàn thành giao dịch",
-    //     description: "Thanh toán thành công!",
-    //   })
-    //   reset();
-    //   onClose(); // Close the modal
-    // } catch (err: any) {
-    //   // Handle errors (e.g., show an error message)
-    //   console.error('Error processing payment:', err);
-    //   toast({
-    //     variant:'default',
-    //     title: "Thất bại",
-    //     description: "Thanh toán thất bại. Vui lòng thử lại sau!",
-    //   })
-    // }
+      // Handle success (e.g., show a success message, update UI)
+      console.log('Payment successful:', responseData);
+      toast({
+        variant:'default',
+        title: "Hoàn thành giao dịch",
+        description: "Thanh toán thành công!",
+      })
+      reset();
+      onClose(); // Close the modal
+      router.refresh();
+    } catch (err: any) {
+      // Handle errors (e.g., show an error message)
+      console.error('Error processing payment:', err);
+
+      toast({
+        variant:'default',
+        title: "Thất bại",
+        description: "Thanh toán thất bại. Vui lòng thử lại sau!",
+      })
+    }
   };
 
   return (
@@ -154,11 +156,17 @@ export default function DoPayment({ hoadon, onClose }: DoPaymentProps) {
                  disabled
                  value={getValues().sotienthanhtoan}
                 />
+                {
+                    error && 
+                <div className='text-red-400'>{error}</div>
+                }
 
               <Button type="submit" disabled={isLoading} className='mt-4'>
                 {isLoading && <CircularProgress size="sm" />}
                 Xác nhận thanh toán
               </Button>
+
+
             </form>
           )}
         </CardContent>
