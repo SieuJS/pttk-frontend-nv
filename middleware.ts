@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { NextRequest } from 'next/server'
+import type { NextRequest } from 'next/server'
 
 const privatePaths = ['/dashboard']
 const authPaths = ['/signin']
@@ -9,11 +9,9 @@ const productEditRegex = /^\/products\/\d+\/edit$/
 // This function can be marked `async` if using `await` inside
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
-  const sessionToken = request.cookies.get('sessionToken')?.value
+  const sessionToken = request.cookies.get('clientToken')?.value
   // Chưa đăng nhập thì không cho vào private paths
-  if (pathname === '/') {
-    return NextResponse.redirect(new URL('/dashboard', request.url));
-  }
+  console.log('get', sessionToken)
   if (privatePaths.some((path) => pathname.startsWith(path)) && !sessionToken) {
     return NextResponse.redirect(new URL('/signin', request.url))
   }
@@ -21,7 +19,9 @@ export function middleware(request: NextRequest) {
   else if (authPaths.some((path) => pathname.startsWith(path)) && sessionToken) {
     return NextResponse.redirect(new URL('/dashboard', request.url));
   }
-
+  if (pathname === '/') {
+    return NextResponse.redirect(new URL('/dashboard', request.url));
+  }
   return NextResponse.next()
 }
 

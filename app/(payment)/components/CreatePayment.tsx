@@ -13,7 +13,7 @@ import { useHttpClient } from '@/shared/hooks/http-hook';
 import { BackEndURL } from '@/components/env/config';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, Modal } from '@mui/material';
-
+import { useRouter } from 'next/navigation';
 
 interface PaymentSheet {
   solan: string;
@@ -32,6 +32,7 @@ const CreatePayment = ({ maphieudangtuyen }: CreatePaymentProps) => {
   const [modal, setModal] = useState<boolean> (false)
   const [splitPrice, setSplitPrice] = useState<number>(0);
   const { sendRequest, error, isLoading, clearError } = useHttpClient();
+  const router = useRouter();
   const {
     register,
     setValue,
@@ -90,7 +91,7 @@ const CreatePayment = ({ maphieudangtuyen }: CreatePaymentProps) => {
         open = {modal}
 
       >
-        <Card>
+        <Card className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] max-w-[600px]'>
           <CardHeader>
             {isLoading ? 'Đang xử lý' : !!error ? 'Lỗi' : 'Hoàn thành'}
           </CardHeader>
@@ -105,9 +106,9 @@ const CreatePayment = ({ maphieudangtuyen }: CreatePaymentProps) => {
                   clearError();
                 }}>Xác nhận</Button>
               ) : (<>
-                <div className="flex">
-                  <Button>Quay về</Button>
-                  <Button>Thanh toán</Button>
+                <div className="w-100 flex gap-4 my-4 mx-4">
+                  <Button variant={'destructive'} onClick={router.back}>Quay về</Button>
+                  <Button onClick={router.refresh}>Thanh toán</Button>
                 </div>
               </>) 
             }

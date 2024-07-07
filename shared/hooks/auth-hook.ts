@@ -24,7 +24,6 @@ export default function AuthHook() {
         if (userDataString) {
             const userData: UserData = JSON.parse(userDataString);
             login(userData);
-            loginAction(userData);
         }
     }, []);
 

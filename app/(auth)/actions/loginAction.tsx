@@ -14,9 +14,10 @@ export type ResponseData = {
 }
 export async function setCookie(data : any) {
     await cookies().set({
-        name: 'sessionToken',
+        name: 'clientToken',
         value: data.accessToken,
         httpOnly: true,
         path: '/',
+
     })
 }
