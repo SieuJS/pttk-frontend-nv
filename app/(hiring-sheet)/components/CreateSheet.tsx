@@ -267,7 +267,6 @@ function CreateSheet() {
                                 />} label="Báo" />
                             </div>
                             <div className='border my-2'></div>
-
                             <div className='grid grid-cols-1  lg:grid-cols-2 gap-4 my-4'>
                                 <div className="grid grid-cols-2 gap-4">
                                 <FormControl fullWidth>

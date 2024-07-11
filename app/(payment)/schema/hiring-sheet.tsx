@@ -2,16 +2,8 @@
 
 import { ColumnDef } from "@tanstack/react-table"
 import { ArrowUpDown, MoreHorizontal } from "lucide-react"
-import CircularProgress from "@mui/joy/CircularProgress"
 import { Button } from "@/components/ui/button"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+
 import Link from "next/link"
 
 // This type is used to define the shape of our data.
@@ -63,13 +55,13 @@ export const detailColumns : ColumnDef<HiringSheet>[] = [
     id : 'detail',
     cell : ({row}) => {
       const sheet = row.original
- 
       return (
        <Link href={"/hiring-sheet/infor/" +sheet.maphieudangtuyen}><Button variant={"outline"}>Chi tiết</Button></Link>
       )
     }
   }
 ]
+
 
 export const paymentColumns : ColumnDef<HiringSheet>[] = [
   ...columns, 

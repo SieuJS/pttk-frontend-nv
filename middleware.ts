@@ -9,7 +9,7 @@ const productEditRegex = /^\/products\/\d+\/edit$/
 // This function can be marked `async` if using `await` inside
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
-  const sessionToken = request.cookies.get('clientToken')?.value
+  const sessionToken = request.cookies.get('sessionToken')?.value
   // Chưa đăng nhập thì không cho vào private paths
   console.log('get', sessionToken)
   if (privatePaths.some((path) => pathname.startsWith(path)) && !sessionToken) {

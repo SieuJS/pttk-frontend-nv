@@ -13,8 +13,8 @@ import {
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { AuthContext } from "@/shared/context/auth-context";
-import { useContext } from "react";
+
+import { useAuthContext } from "./AppProvider";
 
 import { InternalLinks } from "@/app/constants/Paths";
 import MyLink from "./Link";
@@ -41,34 +41,18 @@ export const NavLinks= (
             <BookUser className="h-4 w-4"/>
                 Thanh toán
             </Link>
+            <Link href = '/apply-sheet/infor' className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary">
+            <BookUser className="h-4 w-4"/>
+                Phiếu ứng tuyển
+            </Link>
 
     </>
 )
 function sidebar() {
-    const auth = useContext(AuthContext);
+    const auth = useAuthContext() ; 
     let sideBarLinks = auth.isLoggedIn ? (
         <>
-            <Link href="/dashboard"
-                className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary">
-                <Home className="h-4 w-4" />
-                Thông tin cá nhân
-            </Link>
-            <Link href="/regis-sheet"
-                className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary">
-                <FileSpreadsheet className="h-4 w-4" />
-                Phiếu đăng ký thành viên
-                <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
-                    6
-                </Badge>
-            </Link>
-            <Link href = '/hiring-sheet/infor' className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary">
-            <BookUser className="h-4 w-4"/>
-                Phiếu đăng tuyển
-            </Link>
-            <Link href = '/payment/infor' className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary">
-            <BookUser className="h-4 w-4"/>
-                Thanh toán
-            </Link>
+            {NavLinks}
         </>
     ) : (
         <Link href="/signin"
