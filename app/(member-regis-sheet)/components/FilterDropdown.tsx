@@ -37,7 +37,6 @@ function FilterDropdown() {
   let curPath = usePathname()
   const searchParams = useSearchParams();
   const router = useRouter() ;
-  console.log('reload')
   useEffect(() => {
     const currentFilter = filters.find((filter: filterValue) => {
       if (curPath.includes(filter.name)) {

@@ -220,7 +220,7 @@ function CreateSheet() {
                 <ConfirmModal
                     open={confirmModal}
                     formData={getValues()}
-                    onClose={() => { setConfirmModal(false); router.refresh(); reset() }}
+                    onClose={() => { setConfirmModal(false) }}
                     tendoanhnghiep= {tencongty}
                 />
             }
