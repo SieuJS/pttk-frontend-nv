@@ -18,6 +18,7 @@ function HiringDetail({ maphieudangtuyen }: DetailProps) {
     const router = useRouter();
     const [data, setData] = useState<FormData>() ;
     const {sendRequest, isLoading, error, clearError} = useHttpClient() ;
+    const [canEdit, setCanEdit] = useState(true) ;
     useEffect(() => {
         const fetchData = async() => {
             try {
@@ -26,6 +27,13 @@ function HiringDetail({ maphieudangtuyen }: DetailProps) {
                     BackEndURL+'/hiring-sheet/get/'+maphieudangtuyen
                 )
                 setData(response.data);
+                let thoigiantao = new Date(response.data.thoigiantao);
+                let currentDate = new Date(Date.now())
+                if (thoigiantao.getFullYear() < currentDate.getFullYear() || thoigiantao.getMonth() < currentDate.getMonth() || thoigiantao.getDay() < currentDate.getDay() - 3 ) {
+                    setCanEdit(false)
+                }
+                else setCanEdit(true)
+
             }
             catch (err) {
                 console.log(err)
@@ -74,7 +82,7 @@ function HiringDetail({ maphieudangtuyen }: DetailProps) {
                             <TableCell>
                                 <div className="font-medium">
       
-                                    {data && new Date(data.thoigiandangtuyen).toDateString()}</div>
+                                    {data && new Date(data.thoigiandangtuyen).toUTCString()}</div>
                             </TableCell>
                             <TableCell className='border-l'>
                                 <div className="font-medium">
@@ -154,7 +162,7 @@ function HiringDetail({ maphieudangtuyen }: DetailProps) {
                         <Button className='w-100 basis-1/2' variant={'destructive'} onClick={()=>{router.back()}}>
                             Quay lại
                         </Button>
-                        <Button className='w-100 basis-1/2' >  Chỉnh sửa</Button>
+                        {canEdit && <Button className='w-100 basis-1/2' > <Link href={'/hiring-sheet/edit/' +maphieudangtuyen}> Chỉnh sửa</Link></Button>}
             </div>               
         </>
   )

@@ -22,6 +22,7 @@ interface ConfirmProps {
     formData: FormData;
     tendoanhnghiep?: string;
     onClose: (e? :any) => void;
+    maphieudangtuyen ? : string ;
 }
 
 interface Response {
@@ -33,7 +34,8 @@ const ConfirmModal: React.FC<ConfirmProps> = ({
     open,
     formData,
     onClose,
-    tendoanhnghiep
+    tendoanhnghiep,
+    maphieudangtuyen
 }) => {
     const { sendRequest, isLoading, error, clearError } = useHttpClient();
     const [response, setResponse] = useState<Response>();
@@ -41,9 +43,10 @@ const ConfirmModal: React.FC<ConfirmProps> = ({
     const router = useRouter();
     const onSend = async () => {
         setIsSend(true);
+        let url = `${BackEndURL}/hiring-sheet/${maphieudangtuyen ? 'edit/' + maphieudangtuyen : 'create' }`
         try {
             let res = await sendRequest(
-                BackEndURL + '/hiring-sheet/create',
+                url,
                 'POST',
                 {
                     'Content-Type': 'application/json'
@@ -62,7 +65,10 @@ const ConfirmModal: React.FC<ConfirmProps> = ({
         clearError();
         onClose();
         setIsSend(false);
-        router.refresh() ; 
+        if(response?.data){
+            router.push('/hiring-sheet/infor/'+response?.data.maphieudangtuyen) ; 
+            router.refresh();
+        }
 
 
     }
