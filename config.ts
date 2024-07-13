@@ -6,7 +6,7 @@ const configSchema = z.object({
 })
 
 const configProject = configSchema.safeParse({
-    BACKEND_API: process.env.BACKEND_API || "http://localhost:5000/api",
+    BACKEND_API: process.env.NEXT_PUBLIC|| "http://localhost:5000/api",
     SERVER_API: process.env.SERVER_API || "http://localhost:3001/api"
   })
   if (!configProject.success) {

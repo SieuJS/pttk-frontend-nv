@@ -14,6 +14,7 @@ import { UserData } from "@/shared/hooks/auth-hook";
 import envConfig from "@/config";
 
 import { useAuthContext } from "@/components/shared/AppProvider";
+import { BackEndURL } from "@/components/env/config";
 
 const LoginForm = () => {
     const router = useRouter();
@@ -40,7 +41,7 @@ const LoginForm = () => {
         let data;
         setOpen(true)
         try {       
-            data = await sendRequest(envConfig.BACKEND_API+'/emp/signin', 'POST', {
+            data = await sendRequest(BackEndURL+'/emp/signin', 'POST', {
                 'Content-Type': 'application/json'
             }, JSON.stringify(formData));
             let userData : UserData = {
