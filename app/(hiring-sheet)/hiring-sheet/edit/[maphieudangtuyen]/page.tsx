@@ -127,7 +127,7 @@ function CreateSheet() {
             }
         }
         fetchData() ;
-    }, [maphieudangtuyen])
+    }, [maphieudangtuyen,sendRequest,setValue])
 
 
 

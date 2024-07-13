@@ -23,7 +23,7 @@ function SheetItem({sheets, onDetail }: SheetItemProps) {
     return (
         <>
        {sheets.map((sheet,index) => (
-            <TableRow className="bg-accent">
+            <TableRow className="bg-accent" key = {index.toString()}>
             <TableCell>
               <div className="font-medium">{sheet.maphieudangky}</div>
             </TableCell>

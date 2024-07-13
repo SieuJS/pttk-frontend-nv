@@ -6,8 +6,8 @@ import "./globals.css";
 
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/ui/theme-provider";
-import Sidebar from "@/components/shared/sidebar";
-import Header from "@/components/shared/header";
+import Sidebar from "@/components/shared/Sidebar";
+import Header from "@/components/shared/Header";
 import React from "react";
 import AuthProvider from "@/components/shared/AppProvider";
 import { Toaster } from "@/components/ui/toaster";

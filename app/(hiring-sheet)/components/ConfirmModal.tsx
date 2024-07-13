@@ -133,7 +133,7 @@ const ConfirmModal: React.FC<ConfirmProps> = ({
                             <TableCell>
                                 <div className="font-medium">Hình thức đăng tuyển: </div>
                             </TableCell>
-                            {formData.hinhthucdangtuyen.map(ht => {
+                            {formData.hinhthucdangtuyen.map((ht,i) => {
                                 if (ht === 'website') {
                                     ht = 'Website'
                                 }
@@ -144,7 +144,7 @@ const ConfirmModal: React.FC<ConfirmProps> = ({
                                     ht = 'Báo'
                                 }
                                 return (
-                                    <TableCell>
+                                    <TableCell key ={i.toString()}>
                                         <div className="font-medium">{ht}</div>
                                     </TableCell>)
 

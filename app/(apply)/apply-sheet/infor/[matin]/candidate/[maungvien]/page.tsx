@@ -20,7 +20,7 @@ interface RejectForm {
     lydo: string;
 }
 
-function page() {
+function Page() {
     const { sendRequest, isLoading, error, clearError } = useHttpClient();
     const [rejectModal, setRejectModal] = useState(false);
     const router = useRouter();
@@ -188,4 +188,4 @@ function page() {
     )
 }
 
-export default page
+export default Page

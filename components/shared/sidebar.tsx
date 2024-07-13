@@ -17,7 +17,6 @@ import { Button } from "@/components/ui/button";
 import { useAuthContext } from "./AppProvider";
 
 import { InternalLinks } from "@/app/constants/Paths";
-import MyLink from "./Link";
 export const NavLinks= (
     <>
                 <Link href="/dashboard"
@@ -48,7 +47,7 @@ export const NavLinks= (
 
     </>
 )
-function sidebar() {
+function Sidebar() {
     const auth = useAuthContext() ; 
     let sideBarLinks = auth.isLoggedIn ? (
         <>
@@ -87,4 +86,4 @@ function sidebar() {
     )
 }
 
-export default sidebar
+export default Sidebar

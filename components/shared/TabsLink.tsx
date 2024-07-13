@@ -27,7 +27,7 @@ interface TabLinkProps extends React.HtmlHTMLAttributes<HTMLDivElement> {
 
 }
 
-const TabLinks = React.forwardRef<HTMLDivElement, TabLinkProps> (({links, baseURL}) => {
+const TabLinks = ({links, baseURL} : TabLinkProps) => {
     const base = baseURL
     const path = usePathname();
     const styleBase = 'bg-white inline-block py-2 px-4 text-500 hover:text-800 font-semibold'
@@ -54,6 +54,6 @@ const TabLinks = React.forwardRef<HTMLDivElement, TabLinkProps> (({links, baseUR
 
         </>
     )
-})
+}
 
 export default TabLinks;

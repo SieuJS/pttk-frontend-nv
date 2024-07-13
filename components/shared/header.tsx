@@ -24,8 +24,8 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { useAuthContext } from "./AppProvider";
 import { useRouter } from "next/navigation";
-import { NavLinks } from "./sidebar";
-function header() {
+import { NavLinks } from "./Sidebar";
+function Header() {
     
     const auth = useAuthContext();
     const router = useRouter();
@@ -82,4 +82,4 @@ function header() {
     )
 }
 
-export default header
+export default Header

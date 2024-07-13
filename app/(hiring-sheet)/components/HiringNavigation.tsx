@@ -28,11 +28,11 @@ const HiringNavigation = () => {
         <>
             <ul className="flex border-b">
                 {
-                    HiringPath.map((p) => {
+                    HiringPath.map((p, i) => {
                         let link;
                         let trueLink = path.includes(p.href);
                         return (
-                            <li className="-mb-px mr-1 text-muted-foreground">
+                            <li className="-mb-px mr-1 text-muted-foreground" key = {i}>
                                 <Link href={base + p.href} className={trueLink ? styleActive : styleBase}>
                                     {p.label}
                                 </Link>
