@@ -183,7 +183,9 @@ function CreateSheet() {
                         errors={errors}
                         disabled={isSubmitting}
                         register={{
-                            ...register("khoangthoigiandangtuyen", { required: "Không được bỏ trống" })
+                            ...register("khoangthoigiandangtuyen", {validate: {
+                                positive: v => parseInt(v) > 0 || 'Phải lớn hơn 0'
+                            } })
                         }}
                         alignRight
                     />
