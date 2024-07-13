@@ -47,7 +47,7 @@ export const columns : ColumnDef <ApplySheet>[] =[
           const sheet = row.original
      
           return (
-           <Link href={"/apply-sheet/infor/" +sheet.maphieuungtuyen+'/candidate/' +sheet.maungvien}><Button variant={"outline"}>DS ứng tuyển</Button></Link>
+           <Link href={"/apply-sheet/infor/" +sheet.maphieuungtuyen+'/candidate/' +sheet.maungvien}><Button variant={"outline"}>Thông tin phiếu</Button></Link>
           )
         }
       }

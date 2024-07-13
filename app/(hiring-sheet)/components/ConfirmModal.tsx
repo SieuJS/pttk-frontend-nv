@@ -16,7 +16,7 @@ import { Company } from '@/app/schema/company';
 import { useHttpClient } from '@/shared/hooks/http-hook';
 import { BackEndURL } from '@/components/env/config';
 import CircularProgress from '@mui/joy/CircularProgress';
-
+import { useRouter } from 'next/navigation';
 interface ConfirmProps {
     open: boolean;
     formData: FormData;
@@ -38,6 +38,7 @@ const ConfirmModal: React.FC<ConfirmProps> = ({
     const { sendRequest, isLoading, error, clearError } = useHttpClient();
     const [response, setResponse] = useState<Response>();
     const [isSent,setIsSend] = useState(false);
+    const router = useRouter();
     const onSend = async () => {
         setIsSend(true);
         try {
@@ -51,6 +52,7 @@ const ConfirmModal: React.FC<ConfirmProps> = ({
             );
 
             setResponse(res);
+
         } catch (error) {
 
         }
@@ -60,6 +62,8 @@ const ConfirmModal: React.FC<ConfirmProps> = ({
         clearError();
         onClose();
         setIsSend(false);
+        router.refresh() ; 
+
 
     }
 

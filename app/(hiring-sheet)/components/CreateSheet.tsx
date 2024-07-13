@@ -15,6 +15,7 @@ import {
     Select, MenuItem,FormControl, TextField
 } from "@mui/material"
 import CircularProgress from '@mui/joy/CircularProgress';
+import { useRouter } from 'next/navigation'
 
 
 
@@ -26,6 +27,7 @@ export interface FormData {
     donvithoigian: string,
     mota: string,
     thoigiandangtuyen: string,
+    luong : string ; 
     hinhthucdangtuyen: Array<string>;
     yeucau : {
         bangcap : string ,
@@ -41,7 +43,7 @@ export interface FormData {
 function CreateSheet() {
     const [durationType, setDurationType] = useState<string>('Ngày');
     const { isLoading, error, sendRequest, clearError } = useHttpClient();
-    
+    const router = useRouter();
     const [confirmModal, setConfirmModal] = useState<boolean>(false);
     const [tencongty , setTencongty] = useState<string>('') ;
     const {
@@ -60,6 +62,7 @@ function CreateSheet() {
                 vitridangtuyen: "",
                 soluongtuyendung: "",
                 khoangthoigiandangtuyen: "",
+                luong : "0" ,
                 donvithoigian: durationType,
                 hinhthucdangtuyen: ['website'],
                 mota: "",
@@ -141,7 +144,7 @@ function CreateSheet() {
     )
     const rightForm = (
         <div className="right-form">
-            <div className="mb-4">
+            <div className="mb-4 grid grid-cols-2 gap-4">
                 <Input
                     id='thoigian'
                     type='date'
@@ -154,6 +157,20 @@ function CreateSheet() {
                         }
                     }
                 />
+                <Input
+                        type='number'
+                        label='Lương ($/tháng)'
+                        id='luong'
+                        errors={errors}
+                        disabled={isSubmitting}
+                        register={{
+                            ...register("luong", {
+                                validate: {
+                                    positive: v => parseInt(v) > 0 || 'Phải lớn hơn 0'
+                                }
+                            })
+                        }}
+                    />
             </div>
             <div className="mb-4 grid grid-cols-5 gap-1">
                 <div className="col-span-4">
@@ -203,7 +220,7 @@ function CreateSheet() {
                 <ConfirmModal
                     open={confirmModal}
                     formData={getValues()}
-                    onClose={() => { setConfirmModal(false) }}
+                    onClose={() => { setConfirmModal(false); router.refresh(); reset() }}
                     tendoanhnghiep= {tencongty}
                 />
             }
@@ -262,7 +279,7 @@ function CreateSheet() {
                                 />} label="Banner" />
 
                                 <FormControlLabel control={<Checkbox
-                                    value="bao"
+                                    value="báo"
                                     {...register('hinhthucdangtuyen')}
                                 />} label="Báo" />
                             </div>

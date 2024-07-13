@@ -10,6 +10,7 @@ export type Post = {
     congty : string;
     diachi: string;
     ngaydang : string ;
+    vitri : string;
 
 }
 
@@ -25,6 +26,10 @@ export const PostColumns : ColumnDef <Post>[] =[
     {
         accessorKey : 'diachi',
         header : 'Địa chỉ'
+    },
+    {
+        accessorKey : 'vitri',
+        header : 'Vị trí tuyển'
     },
     {
         accessorKey : 'ngaydang',
