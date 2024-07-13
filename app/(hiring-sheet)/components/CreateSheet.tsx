@@ -76,7 +76,9 @@ function CreateSheet() {
             }
         }
     );
-
+    const atLeast = () => {
+        return getValues().hinhthucdangtuyen.length > 0 || 'Ít nhât phải có một hình thức'
+    }
 
     const onSubmit = handleSubmit(async (formData: FormData) => {
         try {
@@ -275,7 +277,11 @@ function CreateSheet() {
 
                                 <FormControlLabel control={<Checkbox
                                     value="banner"
-                                    {...register('hinhthucdangtuyen')}
+                                    {...register('hinhthucdangtuyen', {validate : {
+                                        atLeast
+                                    }
+
+                                    })}
                                 />} label="Banner" />
 
                                 <FormControlLabel control={<Checkbox
