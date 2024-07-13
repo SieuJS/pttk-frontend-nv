@@ -2,7 +2,7 @@ import { TableRow, TableCell } from "@/components/ui/table"
 import { Badge } from "@/components/ui/badge";
 
 
-function page() {
+function Page() {
   return (
     <TableRow className="bg-accent">
     <TableCell>
@@ -23,4 +23,4 @@ function page() {
   )
 }
 
-export default page
+export default Page

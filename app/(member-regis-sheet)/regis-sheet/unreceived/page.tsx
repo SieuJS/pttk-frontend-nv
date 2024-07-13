@@ -1,7 +1,7 @@
 import { cookies } from "next/headers"
 import ResponseSheet from "../components/ResponseSheet";
 
-function page() {
+function Page() {
   let cookieStore = cookies () ; 
   const sessionToken = cookieStore.get('sessionToken') ;
   return (
@@ -9,4 +9,4 @@ function page() {
   )
 }
 
-export default page
+export default Page
