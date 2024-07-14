@@ -12,6 +12,7 @@ import SheetDetail from './SheetDetail'
 import { useAuthContext } from '@/components/shared/AppProvider'
 
 import LoadingModal from '@/components/modal/LoadingModal'
+import { BackEndURL } from '@/components/env/config'
 const style = {
     position: 'absolute' as 'absolute',
     top: '50%',
@@ -43,7 +44,7 @@ function ResponseSheet({ token, filter }: ResponseSheetProps) {
         const fetchSheet = async () => {
 
             let res = await sendRequest(
-                `${envConfig.BACKEND_API}/regis-sheet/get-${filter}?page=1&limit=10`,
+                `${BackEndURL}/regis-sheet/get-${filter}?page=1&limit=10`,
                 'GET', {
                 'Authorization': `Bearer ${auth.token}`
             }

@@ -7,7 +7,7 @@ import AuthHook, {UserData} from "@/shared/hooks/auth-hook"
 
 
 export const useAuthContext = () => {
-    const auth = useContext(AuthContext);
+    const auth = useContext(AuthContext)
     return auth ; 
 }
 

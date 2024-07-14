@@ -37,7 +37,6 @@ export default function ApplySearch() {
   
     const fetchData = async (page?:number) => {
       const searchData = getValues();
-      console.log('searhc apply')
       try {
         const response = await fetch(BackEndURL+`/hiring-sheet/search-posted?limit=${limit}&page=${page || currentPage}`, {
           method: 'POST',

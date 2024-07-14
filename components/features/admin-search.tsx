@@ -19,7 +19,6 @@ export default function AdminSearch() {
   });
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log(values);
   };
 
   return (

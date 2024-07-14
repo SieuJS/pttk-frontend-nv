@@ -25,14 +25,18 @@ interface CreatePaymentProps {
   maphieudangtuyen: string;
 }
 
-const SolanValues = ['1', '2', '3'];
 
 const CreatePayment = ({ maphieudangtuyen }: CreatePaymentProps) => {
   const [price, setPrice] = useState<number>(0);
   const [modal, setModal] = useState<boolean> (false)
   const [splitPrice, setSplitPrice] = useState<number>(0);
+  const [phieudangtuyen, setPhieudangtuyen] = useState();
   const { sendRequest, error, isLoading, clearError } = useHttpClient();
   const router = useRouter();
+  const  [SolanValues, SetSolanValues] = useState(['1', '2', '3']);
+
+
+
   const {
     register,
     setValue,
@@ -69,13 +73,22 @@ const CreatePayment = ({ maphieudangtuyen }: CreatePaymentProps) => {
     }
   })
 
+
+
   useEffect(() => {
     const fetchData = async () => {
       let response;
       try {
         response = await sendRequest(
           BackEndURL + '/hiring-sheet/price/' + maphieudangtuyen);
-        setPrice(parseInt(response.data.total))
+        setPrice(parseInt(response.data.total));
+        
+        response = await sendRequest(BackEndURL + '/hiring-sheet/get/'+maphieudangtuyen ) ; 
+        let data = response.data ; 
+        if (data.donvithoigian.toLowerCase() === 'ngày' && data.khoangthoigiandangtuyen < 30) {
+          SetSolanValues(['1'])
+        }
+
       }
       catch (err) {
         console.log(err)
