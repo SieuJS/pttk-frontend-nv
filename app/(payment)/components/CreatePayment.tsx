@@ -85,6 +85,7 @@ const CreatePayment = ({ maphieudangtuyen }: CreatePaymentProps) => {
         
         response = await sendRequest(BackEndURL + '/hiring-sheet/get/'+maphieudangtuyen ) ; 
         let data = response.data ; 
+        console.log(data.donvithoigian.toLowerCase() === 'ngày' && data.khoangthoigiandangtuyen < 30);
         if (data.donvithoigian.toLowerCase() === 'ngày' && data.khoangthoigiandangtuyen < 30) {
           SetSolanValues(['1'])
         }

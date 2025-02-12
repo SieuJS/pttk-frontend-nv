@@ -30,8 +30,8 @@ export default function ApplySearch() {
       defaultValues: {
         matin : "",
         congty : "",
-        diachi : "",
         ngaydang : "",
+        diachi: ""
       },
     });
   
